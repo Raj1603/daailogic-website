@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAAILOGIC - Ideal Client Avatar Creation Form</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #f5f1e8 0%, #e8dfc8 100%);
+            color: #2c2c2c;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #8b6914 0%, #b8941f 100%);
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            animation: subtleMove 20s linear infinite;
+        }
+
+        @keyframes subtleMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(30px, 30px); }
+        }
+
+        .crown {
+            font-size: 64px;
+            display: block;
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            color: white;
+            margin-bottom: 15px;
+            letter-spacing: 3px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .header h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            color: rgba(255,255,255,0.95);
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-content {
+            padding: 60px 50px;
+        }
+
+        .intro-text {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 30px;
+            padding: 25px;
+            background: #f9f7f3;
+            border-left: 4px solid #8b6914;
+            border-radius: 8px;
+        }
+
+        .important-note {
+            font-weight: 700;
+            color: #8b6914;
+            margin-bottom: 40px;
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-group {
+            margin-bottom: 40px;
+            animation: fadeInUp 0.6s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .form-group:nth-child(1) { animation-delay: 0.1s; }
+        .form-group:nth-child(2) { animation-delay: 0.15s; }
+        .form-group:nth-child(3) { animation-delay: 0.2s; }
+        .form-group:nth-child(4) { animation-delay: 0.25s; }
+        .form-group:nth-child(5) { animation-delay: 0.3s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        label {
+            display: block;
+            font-size: 17px;
+            font-weight: 600;
+            color: #2c2c2c;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .required {
+            color: #d32f2f;
+            margin-left: 4px;
+        }
+
+        .example-text {
+            font-size: 14px;
+            color: #888;
+            font-style: italic;
+            margin-bottom: 10px;
+            padding-left: 8px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 16px;
+            font-size: 15px;
+            font-family: 'Montserrat', sans-serif;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            background: white;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        textarea:focus {
+            border-color: #8b6914;
+            background: #fffef8;
+            box-shadow: 0 0 0 4px rgba(139, 105, 20, 0.1);
+            transform: translateY(-2px);
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+            line-height: 1.6;
+        }
+
+        .long-answer {
+            min-height: 200px;
+        }
+
+        .form-success {
+            display: none;
+            margin-top: 20px;
+            padding: 14px 18px;
+            background: #f0f8f6;
+            color: #1f5a43;
+            border-radius: 8px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .form-success.visible { display: block; }
+
+        .submit-container {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 2px solid #f0f0f0;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #8b6914 0%, #b8941f 100%);
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            padding: 18px 60px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 8px 20px rgba(139, 105, 20, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(139, 105, 20, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(-1px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header {
+                padding: 40px 20px;
+            }
+
+            .header h1 {
+                font-size: 36px;
+            }
+
+            .header h2 {
+                font-size: 18px;
+            }
+
+            .form-content {
+                padding: 40px 25px;
+            }
+
+            .crown {
+                font-size: 48px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <span class="crown">♕</span>
+            <h1>DAAILOGIC</h1>
+            <h2>Ideal Client Avatar Creation Form</h2>
+        </div>
+
+        <div class="form-content">
+            <!-- <div class="intro-text">
+                Please take this seriously and complete it all in one sitting, it should take no more than 20 minutes. Complete this form for your systems, if you need more than 10 please group them into larger chunks. You do not need to answer every question, but the more you share the more we can help you.
+            </div> -->
+
+            <!-- <div class="important-note">
+                Please enter EXACT name you entered in the onboarding form
+            </div> -->
+
+            <form id="avatarForm" action="https://formspree.io/f/mlgnwvwr" method="POST">
+                <!-- Replace `your-form-id` with your Formspree form ID and verify your recipient email in the Formspree dashboard. -->
+                <input type="hidden" name="_subject" value="New Avatar Submission from DAAILogic">
+                <!-- Question 1 -->
+                <div class="form-group">
+                    <label for="name">What is your name? <span class="required">*</span></label>
+                    <div class="example-text">Full Name</div>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="form-group">
+                    <label for="email">What is your email?  <span class="required">*</span></label>
+                    <div class="example-text">Email</div>
+                    <!-- <div class="example-text">"This should be the one you originally signed up with."</div> -->
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="form-group">
+                    <label for="avatar_name">What is your ideal avatar's name? <span class="required">*</span></label>
+                    <div class="example-text">"Eg: Henry Smith"</div>
+                    <input type="text" id="avatar_name" name="avatar_name" required>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="form-group">
+                    <label for="age_range">What is the age (range) of your ideal avatar?</label>
+                    <div class="example-text">"Eg: 25-45"</div>
+                    <input type="text" id="age_range" name="age_range">
+                </div>
+
+                <!-- Question 5 -->
+                <div class="form-group">
+                    <label for="gender">What is the gender of your ideal avatar?</label>
+                    <div class="example-text">"Eg: Male"</div>
+                    <input type="text" id="gender" name="gender">
+                </div>
+
+                <!-- Question 6 -->
+                <div class="form-group">
+                    <label for="marital_status">What is the marital status of your ideal avatar?</label>
+                    <div class="example-text">"Eg: Single/In A Relationship"</div>
+                    <input type="text" id="marital_status" name="marital_status">
+                </div>
+
+                <!-- Question 7 -->
+                <div class="form-group">
+                    <label for="kids">How many kids does your ideal avatar have? What age (range) are they in?</label>
+                    <div class="example-text">"Eg: 0"</div>
+                    <input type="text" id="kids" name="kids">
+                </div>
+
+                <!-- Question 8 -->
+                <div class="form-group">
+                    <label for="location">Where is your ideal avatar located?</label>
+                    <div class="example-text">"Eg: United States/Canada"</div>
+                    <input type="text" id="location" name="location">
+                </div>
+
+                <!-- Question 9 -->
+                <div class="form-group">
+                    <label for="industry">Where is industry/occupation is your ideal avatar in?</label>
+                    <div class="example-text">"Eg: Corporate America"</div>
+                    <input type="text" id="industry" name="industry">
+                </div>
+
+                <!-- Question 10 -->
+                <div class="form-group">
+                    <label for="job_title">What is your ideal avatar's job title?</label>
+                    <div class="example-text">"Eg: People-Facing Role/Jobs (Salesperson, Customer Service Rep, Customer Support)"</div>
+                    <input type="text" id="job_title" name="job_title">
+                </div>
+
+                <!-- Question 11 -->
+                <div class="form-group">
+                    <label for="income">What is your ideal avatar's annual income/revenue/profit?</label>
+                    <div class="example-text">"Eg: $40,000-$60,000/Year W2 Income"</div>
+                    <input type="text" id="income" name="income">
+                </div>
+
+                <!-- Question 12 -->
+                <div class="form-group">
+                    <label for="education">What is your ideal avatar's minimum level of education?</label>
+                    <div class="example-text">"Eg: High School Graduate"</div>
+                    <input type="text" id="education" name="education">
+                </div>
+
+                <!-- Question 13 -->
+                <div class="form-group">
+                    <label for="books">What types of books/magazines does your ideal avatar consume?</label>
+                    <div class="example-text">"Eg: Personal Development: Think and Grow Rich, How To Win Friends and Influence People, Rich Dad Poor Dad, Slight Edge, 4 Hour Work Week, Atomic Habits, 7 Habits of Highly Effective People, The Subtle Art Of Not Giving A Fuck, Awaken The Giant Within"</div>
+                    <textarea id="books" name="books"></textarea>
+                </div>
+
+                <!-- Question 14 -->
+                <div class="form-group">
+                    <label for="websites">What types of blogs/websites does your ideal avatar consume?</label>
+                    <div class="example-text">https://www.reddit.com/r/Fire/</div>
+                    <textarea id="websites" name="websites"></textarea>
+                </div>
+
+                <!-- Question 15 -->
+                <div class="form-group">
+                    <label for="social_media">What social media platforms is your ideal avatar likely be found on?</label>
+                    <div class="example-text">"Eg: Youtube, TikTok"</div>
+                    <input type="text" id="social_media" name="social_media">
+                </div>
+
+                <!-- Question 16 -->
+                <div class="form-group">
+                    <label for="influencers">Who (influencer/guru) does your ideal avatar listen to?</label>
+                    <div class="example-text">"Eg: Tony Robbins, Gary V., Tim Ferris, Graham Stephen, Ryan Pineda, Mike Vestil, Kevin David"</div>
+                    <textarea id="influencers" name="influencers"></textarea>
+                </div>
+
+                <!-- Question 17 -->
+                <div class="form-group">
+                    <label for="conferences">What types of conferences does your ideal avatar attend?</label>
+                    <textarea id="conferences" name="conferences"></textarea>
+                </div>
+
+                <!-- Question 18 -->
+                <div class="form-group">
+                    <label for="competitors">Who is your ideal avatar already buying (or thinking of buying) your solution from (your competitors)?</label>
+                    <textarea id="competitors" name="competitors"></textarea>
+                </div>
+
+                <!-- Question 19 -->
+                <div class="form-group">
+                    <label for="tribal_language">What are some examples of the tribal language your ideal avatar uses?</label>
+                    <div class="example-text">"Eg: Financial Independence, Retire Early, Side Hustle, Passive Income"</div>
+                    <textarea id="tribal_language" name="tribal_language"></textarea>
+                </div>
+
+                <!-- Question 20 -->
+                <div class="form-group">
+                    <label for="pain_points">What are some pain points your ideal avatar deals with in regards to the problem you solve? What keeps them up at night about this? What is their daily frustration?</label>
+                    <div class="example-text">"Not feeling appreciated at the workplace, overwhelmed with so many options to make money online, feeling stuck, jealousy/frustration as other people online make more than you, frustrated because you can do so much more but aren't, fear of losing job, fear of running out of money, feeling alone, fear of making mistakes, afraid of looking bad/foolish if you tried something new, fear of disappointing others, afraid to be scammed, feeling inadequate, feeling embarrassed for what you do."</div>
+                    <textarea id="pain_points" name="pain_points" class="long-answer"></textarea>
+                </div>
+
+                <!-- Question 21 -->
+                <div class="form-group">
+                    <label for="challenges">What are some challenges your ideal avatar deals with in regards to the problem you solve? Why haven't they been able to solve it yet?</label>
+                    <div class="example-text">"Eg: Not having the opportunity to make more income, not having enough disposable income, has already tried to make money online and failed, not knowing where to start on income journey, location dependent, lack of time, lack of time to learn a new skill / start a side hustle, not having community or leader, lack of support system, trading time for money, unable to find a suitable partner."</div>
+                    <textarea id="challenges" name="challenges" class="long-answer"></textarea>
+                </div>
+
+                <!-- Question 22 -->
+                <div class="form-group">
+                    <label for="goals">What goals does your ideal avatar have in regards to the problem you solve? What do they secretly desire most?</label>
+                    <div class="example-text">"Eg: Have more time freedom, have higher income, have more disposable income, have emergency funds, be able to invest income, live a healthy lifestyle, live in a nice home/apartment, have a nice car, travel the world, be a provider (family, friends, loved ones), recognition, be respected by society/others, more location freedom, not having to look at price tags, have an impact on others, have/be part of a supportive community, live life on your own terms."</div>
+                    <textarea id="goals" name="goals" class="long-answer"></textarea>
+                </div>
+
+                <!-- Question 23 -->
+                <div class="form-group">
+                    <label for="values">What does your ideal avatar value? In themselves, in the businesses they work with and people they interact with?</label>
+                    <div class="example-text">"Eg: Integrity, honesty, hard work, extreme ownership, altruistic, non-discriminatory, experimentation, persistence, optimistic, humility, courage, empathy, security."</div>
+                    <textarea id="values" name="values" class="long-answer"></textarea>
+                </div>
+
+                <!-- Question 24 -->
+                <div class="form-group">
+                    <label for="objections">What are the typical objections your ideal avatar has around working with your type of solution? Why would they not be "pull the trigger" if they heard about it?</label>
+                    <div class="example-text">"Eg: Is this a scam? Is this too complicated? Will this work specifically for me? Do I have enough time? Will I be forever in debt? What if I don't like it? What if I do a terrible job? What if I embarrass myself? Will I even be able to find clients? I need to speak with my partner. I need time to decide. It's not the right time. Is this worth it? Is it oversaturated? What makes you different? It's too expensive. I've been burned before."</div>
+                    <textarea id="objections" name="objections" class="long-answer"></textarea>
+                </div>
+
+                <!-- Question 25 -->
+                <div class="form-group">
+                    <label for="story">Do you have a relatable story around your ideal avatar's pain, challenges, goals that you can share? It can be your story, someone you know, or a client.</label>
+                    <div class="example-text">"Eg: When I purchased my first \"make money online\" program I was afraid to tell anyone what I was doing. My whole identity was like a college drop out kid and I was worried that if someone saw me talking about online marketing they would call me a scam. My goal was to be successful first, then I would tell my friends/family, almost to rub it in their faces. One night, as I was having dinner with one of my best friend and his dad. He asked him, \"Son, I need some help with my social media (he's a plastic surgeon), do you know anyone that could help me? \"Before he even answered I responded back, \"I can do it\", to which he responded, \"you can?\" and my friend also responded, \"you can?\"."</div>
+                    <textarea id="story" name="story" class="long-answer"></textarea>
+                </div>
+
+                <!-- Question 26 -->
+                <div class="form-group">
+                    <label for="biography">Imagine you were to write the introduction of the biography of your ideal avatar RIGHT BEFORE they started working with you? What would you say? In story format describe who they are, what they're scared of, what they secretly desire, what they hate, etc.</label>
+                    <div class="example-text">"Henry is a college graduate working his unfulfilling job for 3 years. Every day he wakes up and scrolls online to see his friends/people he follows \"crushing\" life as he gets ready to live the exact same day again, for his 3rd year in a row.
+
+He lives in an \"un-inspiring\" environment surrounded by \"un-inspiring\" people. At work, Henry simply feels like a cog in the wheel.
+
+He wants to have more impact, learn, grow, and be appreciated, but he feels like he doesn't even have the opportunity (and probably never will).
+
+Henry spends his free time reading personal development books and watching Youtube videos on how to make money online.
+
+Henry has even purchased a few courses for a few thousand dollars, but nothing changed for him in his life. Henry feels that if he doesn't make a change soon he will waste the best years of his life.
+
+He feels lost or confused about what the next step (or next couple of steps) should be and feels that everyone is trying to sell him something.
+
+Henry has tried dating a few women, but constantly struggles to find a quality one, he believes because he does not have enough status. Henry feels awkward or embarrassed every time he talks with a woman because of where he works, what he does, what kind of car he drives, and what his apartment looks like.
+
+Similar to women, Henry doesn't like coming home for the holidays because his old friends/family will see that nothing has changed in the past 3 years.
+
+Henry's body is not where he wants it to be either, this is due to a lack of motivation, lack of funds, and lack of time.
+
+Henry knows he has the potential to do so much, but feels he can't find the right vehicle/path to take. He feels confused and overwhelmed at so many choices and goes from one opportunity to the other without really seeing any progress.
+
+The main thing Henry wants out of life is progress. Henry wants to learn, wants to be accountable, wants to make a difference, but doesn't even know where to start."</div>
+                    <textarea id="biography" name="biography" class="long-answer"></textarea>
+                </div>
+
+                <!-- Question 27 -->
+                <div class="form-group">
+                    <label for="additional_info">Please add any additional information you think would be valuable to know about your ideal avatar here.</label>
+                    <textarea id="additional_info" name="additional_info" class="long-answer"></textarea>
+                </div>
+
+                <div class="submit-container">
+                    <button type="submit" class="submit-btn">Submit</button>
+                </div>
+                <div class="form-success" id="formSuccess">Thanks! We'll be in touch shortly.</div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('avatarForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const btn = this.querySelector('button[type="submit"]');
+            const originalText = btn.innerText;
+
+            btn.innerText = 'Sending...';
+            btn.disabled = true;
+
+            // Build payload: use each question's label text as the field name
+            const elements = Array.from(this.elements);
+            const payload = new FormData();
+
+            const fieldOrder = [];
+            elements.forEach(el => {
+                if (!el.name) return;
+
+                // Keep hidden/Formspree control fields as-is
+                if (el.type === 'hidden') {
+                    payload.append(el.name, el.value);
+                    return;
+                }
+
+                // Collect inputs, textareas, selects (exclude buttons)
+                const tag = el.tagName.toLowerCase();
+                const type = (el.type || '').toLowerCase();
+                if ((tag === 'input' || tag === 'textarea' || tag === 'select') && type !== 'submit' && type !== 'button' && !el.disabled) {
+                    let labelText = el.name;
+                    if (el.id) {
+                        const lbl = document.querySelector(`label[for="${el.id}"]`);
+                        if (lbl && lbl.innerText) labelText = lbl.innerText;
+                    }
+                    // Remove required asterisk and extra whitespace
+                    labelText = labelText.replace(/\*/g, '').trim();
+                    payload.append(labelText, el.value);
+                    fieldOrder.push(labelText);
+                }
+            });
+
+            // Include the client-side field order so the webhook can preserve column ordering
+            if (fieldOrder.length) {
+                payload.append('_field_order', fieldOrder.join('|||'));
+            }
+
+            // Send to Formspree and Apps Script (dual-submit). Replace the Apps Script URL below.
+            const appsScriptUrl = 'https://script.google.com/macros/s/AKfycbydEjb9wcGQjY5NqZ9d0SOmfaqj142kkwkPjbTfHykt8pnqBhqHMjwz7ExmlIJSj4E/exec'; // <-- replace
+
+            const formspreePromise = fetch(this.action, {
+                method: 'POST',
+                body: payload,
+                headers: { 'Accept': 'application/json' }
+            });
+
+            const appsPromise = fetch(appsScriptUrl, {
+                method: 'POST',
+                body: payload,
+                headers: { 'Accept': 'application/json' }
+            }).catch(err => {
+                console.warn('Apps Script post failed:', err);
+                return null;
+            });
+
+            try {
+                const results = await Promise.allSettled([formspreePromise, appsPromise]);
+                const fsResult = results[0];
+                const appsResult = results[1];
+
+                const fsOk = fsResult.status === 'fulfilled' && fsResult.value && fsResult.value.ok;
+                const appsOk = appsResult && appsResult.status === 'fulfilled' && appsResult.value && appsResult.value.ok;
+
+                console.log('Submission results:', { fsResult, appsResult });
+
+                if (fsOk || appsOk) {
+                    btn.innerText = 'Message Sent';
+                    this.reset();
+                    const formSuccess = document.getElementById('formSuccess');
+                    if (formSuccess) formSuccess.classList.add('visible');
+
+                    setTimeout(() => {
+                        btn.innerText = originalText;
+                        btn.disabled = false;
+                        if (formSuccess) formSuccess.classList.remove('visible');
+                    }, 4000);
+                } else {
+                    throw new Error('Both Formspree and Apps Script submissions failed');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                btn.innerText = 'Error';
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.disabled = false;
+                }, 3000);
+                alert('Something went wrong. Please try again later or email us directly.');
+            }
+        });
+
+        // Add smooth scroll for better UX
+        document.querySelectorAll('input, textarea').forEach(element => {
+            element.addEventListener('focus', function() {
+                this.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            });
+        });
+    </script>
+</body>
+</html>

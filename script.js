@@ -10,6 +10,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Mobile Menu Toggle
+    const hamburger = document.querySelector('.hamburger');
+    const mobileNav = document.querySelector('.mobile-nav');
+    const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+
+    if (hamburger && mobileNav) {
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            mobileNav.classList.toggle('active');
+            document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+        });
+
+        // Close menu when a link is clicked
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                mobileNav.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+    }
+
     // Intersection Observer for Scroll Animations
     const observerOptions = {
         root: null,
@@ -36,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (contactForm) {
         contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
+
             const btn = contactForm.querySelector('button');
             const originalText = btn.innerText;
 
@@ -44,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.disabled = true;
 
             const formData = new FormData(contactForm);
-            
+
             try {
                 const response = await fetch(contactForm.action, {
                     method: 'POST',
@@ -58,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     btn.innerText = 'Message Sent';
                     contactForm.reset();
                     formSuccess.classList.add('visible');
-                    
+
                     setTimeout(() => {
                         btn.innerText = originalText;
                         btn.disabled = false;
