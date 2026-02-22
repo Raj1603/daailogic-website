@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RIA Qualification Form | DAAILogic</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #f5f1e8 0%, #e8dfc8 100%);
+            color: #2c2c2c;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #8b6914 0%, #b8941f 100%);
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            animation: subtleMove 20s linear infinite;
+        }
+
+        @keyframes subtleMove {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            100% {
+                transform: translate(30px, 30px);
+            }
+        }
+
+        .crown {
+            font-size: 64px;
+            display: block;
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            color: white;
+            margin-bottom: 15px;
+            letter-spacing: 3px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .header h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-content {
+            padding: 60px 50px;
+        }
+
+        .intro-text {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 30px;
+            padding: 25px;
+            background: #f9f7f3;
+            border-left: 4px solid #8b6914;
+            border-radius: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 40px;
+            animation: fadeInUp 0.6s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .form-group:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .form-group:nth-child(2) {
+            animation-delay: 0.15s;
+        }
+
+        .form-group:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .form-group:nth-child(4) {
+            animation-delay: 0.25s;
+        }
+
+        .form-group:nth-child(5) {
+            animation-delay: 0.3s;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .question-label {
+            display: block;
+            font-size: 17px;
+            font-weight: 700;
+            color: #2c2c2c;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .question-number {
+            color: #8b6914;
+            margin-right: 8px;
+        }
+
+        .radio-group,
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .radio-option,
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            padding: 14px 18px;
+            background: #fafaf8;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .radio-option:hover,
+        .checkbox-option:hover {
+            background: #fffef8;
+            border-color: #8b6914;
+        }
+
+        input[type="radio"],
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 12px;
+            cursor: pointer;
+            accent-color: #8b6914;
+        }
+
+        .radio-option:has(input:checked),
+        .checkbox-option:has(input:checked) {
+            background: #fffef8;
+            border-color: #8b6914;
+            font-weight: 600;
+            box-shadow: 0 0 0 4px rgba(139, 105, 20, 0.1);
+        }
+
+        .option-label {
+            font-size: 15px;
+            color: #2c2c2c;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .sub-question {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .sub-question-label {
+            display: block;
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 12px;
+            color: #555;
+        }
+
+        .form-success {
+            display: none;
+            margin-top: 20px;
+            padding: 14px 18px;
+            background: #f0f8f6;
+            color: #1f5a43;
+            border-radius: 8px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .form-success.visible {
+            display: block;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .submit-container {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 2px solid #f0f0f0;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #8b6914 0%, #b8941f 100%);
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            padding: 18px 60px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 8px 20px rgba(139, 105, 20, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(139, 105, 20, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header {
+                padding: 40px 20px;
+            }
+
+            .header h1 {
+                font-size: 36px;
+            }
+
+            .header h2 {
+                font-size: 18px;
+            }
+
+            .form-content {
+                padding: 40px 25px;
+            }
+
+            .crown {
+                font-size: 48px;
+            }
+
+            .question-label {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <span class="crown">♕</span>
+            <h1>DAAILOGIC</h1>
+            <h2>RIA Qualification Form</h2>
+        </div>
+
+        <div class="form-content">
+            <div class="intro-text">
+                This brief questionnaire helps us ensure our strategy call is tailored to your specific needs and goals.
+                Please answer honestly - there are no wrong answers, only better-fit opportunities.
+            </div>
+
+            <form id="riaForm" action="https://formspree.io/f/REPLACE_WITH_YOUR_FORMSPREE_ID" method="POST">
+                <input type="hidden" name="_subject" value="New RIA Qualification from DAAILogic">
+
+                <!-- Question 1: Current AUM -->
+                <div class="form-group">
+                    <label class="question-label">
+                        <span class="question-number">Q1)</span>
+                        What is your current AUM (Assets Under Management)?
+                    </label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="Current AUM" value="Under $1M" required>
+                            <span class="option-label">Under $1M</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="Current AUM" value="$1M–$5M" required>
+                            <span class="option-label">$1M–$5M</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="Current AUM" value="$5M–$10M" required>
+                            <span class="option-label">$5M–$10M</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="Current AUM" value="$10M–$50M" required>
+                            <span class="option-label">$10M–$50M</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="Current AUM" value="$50M+" required>
+                            <span class="option-label">$50M+</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 2: Monthly Growth Budget -->
+                <div class="form-group">
+                    <label class="question-label">
+                        <span class="question-number">Q2)</span>
+                        What budget can you allocate monthly for client acquisition/marketing systems?
+                    </label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="Monthly Growth Budget" value="Under $1,000/mo" required>
+                            <span class="option-label">Under $1,000/mo</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="Monthly Growth Budget" value="$1,000–$1,999/mo" required>
+                            <span class="option-label">$1,000–$1,999/mo</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="Monthly Growth Budget" value="$2,000–$4,999/mo" required>
+                            <span class="option-label">$2,000–$4,999/mo</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="Monthly Growth Budget" value="$5,000–$9,999/mo" required>
+                            <span class="option-label">$5,000–$9,999/mo</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="Monthly Growth Budget" value="$10,000+/mo" required>
+                            <span class="option-label">$10,000+/mo</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 3: Current Clients/Households -->
+                <div class="form-group">
+                    <label class="question-label">
+                        <span class="question-number">Q3)</span>
+                        Roughly how many active client households do you currently serve?
+                    </label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="Active Client Households" value="0–10" required>
+                            <span class="option-label">0–10</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="Active Client Households" value="11–25" required>
+                            <span class="option-label">11–25</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="Active Client Households" value="26–75" required>
+                            <span class="option-label">26–75</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="Active Client Households" value="76–200" required>
+                            <span class="option-label">76–200</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="Active Client Households" value="200+" required>
+                            <span class="option-label">200+</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 4: Growth Goal -->
+                <div class="form-group">
+                    <label class="question-label">
+                        <span class="question-number">Q4)</span>
+                        What is your primary growth goal for the next 90 days?
+                    </label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="Primary Growth Goal" value="Add 2–5 qualified intro calls/month"
+                                required>
+                            <span class="option-label">Add 2–5 qualified intro calls/month</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="Primary Growth Goal" value="Add 6–10 qualified intro calls/month"
+                                required>
+                            <span class="option-label">Add 6–10 qualified intro calls/month</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="Primary Growth Goal" value="Add 11–20 qualified intro calls/month"
+                                required>
+                            <span class="option-label">Add 11–20 qualified intro calls/month</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="Primary Growth Goal" value="Not sure yet" required>
+                            <span class="option-label">Not sure yet</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 5: Current Lead Sources -->
+                <div class="form-group">
+                    <label class="question-label">
+                        <span class="question-number">Q5)</span>
+                        Where do most new prospects currently come from? (Select all that apply)
+                    </label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="Lead Source - Referrals" value="Yes">
+                            <span class="option-label">Referrals</span>
+                        </label>
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="Lead Source - COIs" value="Yes">
+                            <span class="option-label">COIs (CPAs/attorneys)</span>
+                        </label>
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="Lead Source - LinkedIn" value="Yes">
+                            <span class="option-label">LinkedIn</span>
+                        </label>
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="Lead Source - Website/Inbound" value="Yes">
+                            <span class="option-label">Website/inbound search</span>
+                        </label>
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="Lead Source - Seminars/Webinars" value="Yes">
+                            <span class="option-label">Seminars/webinars</span>
+                        </label>
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="Lead Source - Paid Ads" value="Yes">
+                            <span class="option-label">Paid ads</span>
+                        </label>
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="Lead Source - No Consistent Source" value="Yes">
+                            <span class="option-label">No consistent source</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 6: Bottleneck -->
+                <div class="form-group">
+                    <label class="question-label">
+                        <span class="question-number">Q6)</span>
+                        What's the biggest bottleneck in getting new clients right now?
+                    </label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="Biggest Bottleneck" value="Not enough leads" required>
+                            <span class="option-label">Not enough leads</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="Biggest Bottleneck" value="Leads aren't qualified" required>
+                            <span class="option-label">Leads aren't qualified</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="Biggest Bottleneck" value="Low booked intro-call rate" required>
+                            <span class="option-label">Low booked intro-call rate</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="Biggest Bottleneck" value="No-shows / reschedules" required>
+                            <span class="option-label">No-shows / reschedules</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="Biggest Bottleneck" value="Long sales cycle / decision delays"
+                                required>
+                            <span class="option-label">Long sales cycle / decision delays</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="Biggest Bottleneck" value="Compliance slows marketing" required>
+                            <span class="option-label">Compliance slows marketing</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 7: Capacity -->
+                <div class="form-group">
+                    <label class="question-label">
+                        <span class="question-number">Q7)</span>
+                        If you started getting 5–10 more qualified intro calls/month, do you have capacity to take them?
+                    </label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="Capacity Available" value="Yes, capacity is available" required>
+                            <span class="option-label">Yes, capacity is available</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="Capacity Available" value="Yes, with small process changes"
+                                required>
+                            <span class="option-label">Yes, with small process changes</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="Capacity Available" value="No, we're at capacity right now"
+                                required>
+                            <span class="option-label">No, we're at capacity right now</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 8: Decision Maker + Timeline -->
+                <div class="form-group">
+                    <label class="question-label">
+                        <span class="question-number">Q8)</span>
+                        Who would approve a $2k–$5k/mo growth system if it's clearly ROI-positive?
+                    </label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="Decision Maker" value="Me (I'm the decision maker)" required>
+                            <span class="option-label">Me (I'm the decision maker)</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="Decision Maker" value="Partner/committee" required>
+                            <span class="option-label">Partner/committee</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="Decision Maker" value="Not sure" required>
+                            <span class="option-label">Not sure</span>
+                        </label>
+                    </div>
+
+                    <div id="sq-start-timeline" class="sub-question hidden">
+                        <label class="sub-question-label">When would you want to start if it's a fit?</label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="Start Timeline" value="This month">
+                                <span class="option-label">This month</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="Start Timeline" value="Next month">
+                                <span class="option-label">Next month</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="Start Timeline" value="2–3 months">
+                                <span class="option-label">2–3 months</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="Start Timeline" value="Just exploring">
+                                <span class="option-label">Just exploring</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div id="sq-bring-decision-maker" class="sub-question hidden">
+                        <label class="sub-question-label">Should you share info and bring that decision maker for
+                            strategy call to attend?</label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="Bring Decision Maker" value="Yes - I will bring them">
+                                <span class="option-label">Yes - I will bring them</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="Bring Decision Maker" value="No / Not sure yet">
+                                <span class="option-label">No / Not sure yet</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 9: Tools -->
+                <div class="form-group">
+                    <label class="question-label">
+                        <span class="question-number">Q9)</span>
+                        What tools do you currently use? (Select all that apply)
+                    </label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="Tool - CRM" value="Yes">
+                            <span class="option-label">CRM (Redtail / Wealthbox / Salesforce / HubSpot / other)</span>
+                        </label>
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="Tool - Email Marketing" value="Yes">
+                            <span class="option-label">Email marketing tool (Mailchimp/ActiveCampaign/etc.)</span>
+                        </label>
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="Tool - Scheduler" value="Yes">
+                            <span class="option-label">Calendly or similar scheduler</span>
+                        </label>
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="Tool - None/Manual" value="Yes">
+                            <span class="option-label">None / mostly manual</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 10: Show-up Commitment -->
+                <div class="form-group">
+                    <label class="question-label">
+                        <span class="question-number">Q10)</span>
+                        This strategy call is normally $500 but waived for qualified RIAs. Can you commit to showing up
+                        on time?
+                    </label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="Show-up Commitment"
+                                value="Yes — I'll attend at the scheduled time" required>
+                            <span class="option-label">Yes — I'll attend at the scheduled time</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="Show-up Commitment"
+                                value="Yes — if I need to reschedule, I'll do it 24+ hours ahead" required>
+                            <span class="option-label">Yes — if I need to reschedule, I'll do it 24+ hours ahead</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="Show-up Commitment" value="No / not sure" required>
+                            <span class="option-label">No / not sure</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="submit-container">
+                    <button type="submit" class="submit-btn">Submit</button>
+                </div>
+                <div class="form-success" id="formSuccess">Thanks! We'll be in touch shortly.</div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('riaForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const btn = this.querySelector('button[type="submit"]');
+            const originalText = btn.innerText;
+
+            btn.innerText = 'Sending...';
+            btn.disabled = true;
+
+            // Build payload
+            const elements = Array.from(this.elements);
+            const payload = new FormData();
+            const fieldOrder = [];
+
+            elements.forEach(el => {
+                if (!el.name) return;
+
+                if (el.type === 'hidden') {
+                    payload.append(el.name, el.value);
+                    return;
+                }
+
+                // For radio/checkbox, only process if checked
+                if ((el.type === 'radio' || el.type === 'checkbox') && !el.checked) return;
+
+                const tag = el.tagName.toLowerCase();
+                const type = (el.type || '').toLowerCase();
+                if ((tag === 'input' || tag === 'textarea' || tag === 'select') && type !== 'submit' && type !== 'button' && !el.disabled) {
+
+                    let labelText = el.name;
+                    // Try to find the question label
+                    const formGroup = el.closest('.form-group') || el.closest('.sub-question');
+                    if (formGroup) {
+                        const qLabel = formGroup.querySelector('.question-label, .sub-question-label');
+                        if (qLabel) {
+                            // Extract text and clean it (remove Q1), asterisks, etc.)
+                            labelText = qLabel.innerText.replace(/Q\d+\)/, '').replace(/\*/g, '').trim();
+                        }
+                    }
+
+                    payload.append(labelText, el.value);
+                    if (!fieldOrder.includes(labelText)) {
+                        fieldOrder.push(labelText);
+                    }
+                }
+            });
+
+            if (fieldOrder.length) {
+                payload.append('_field_order', fieldOrder.join('|||'));
+            }
+
+            const appsScriptUrl = 'https://script.google.com/macros/s/AKfycby4PM9Fb6_gUwqLPHEws0yrgQXVvPCIVu4TjMJFPUvOBjC16Ojpog3ZlDb7nG2Mpw1SKA/exec';
+
+            const formspreePromise = fetch(this.action, {
+                method: 'POST',
+                body: payload,
+                headers: { 'Accept': 'application/json' }
+            });
+
+            const appsPromise = fetch(appsScriptUrl, {
+                method: 'POST',
+                body: payload,
+                headers: { 'Accept': 'application/json' }
+            }).catch(err => {
+                console.warn('Apps Script post failed:', err);
+                return null;
+            });
+
+            try {
+                const results = await Promise.allSettled([formspreePromise, appsPromise]);
+                const fsResult = results[0];
+                const appsResult = results[1];
+
+                const fsOk = fsResult.status === 'fulfilled' && fsResult.value && fsResult.value.ok;
+                const appsOk = appsResult && appsResult.status === 'fulfilled' && appsResult.value && appsResult.value.ok;
+
+                if (fsOk || appsOk) {
+                    btn.innerText = 'Message Sent';
+                    this.reset();
+                    const formSuccess = document.getElementById('formSuccess');
+                    if (formSuccess) formSuccess.classList.add('visible');
+
+                    setTimeout(() => {
+                        btn.innerText = originalText;
+                        btn.disabled = false;
+                        if (formSuccess) formSuccess.classList.remove('visible');
+                    }, 4000);
+                } else {
+                    throw new Error('Both submissions failed');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                btn.innerText = 'Error';
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.disabled = false;
+                }, 3000);
+                alert('Something went wrong. Please try again later or email us directly.');
+            }
+        });
+
+        document.querySelectorAll('input, textarea').forEach(element => {
+            element.addEventListener('focus', function () {
+                this.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            });
+        });
+
+        // Conditional Logic for Question 8
+        const decisionMakerRadios = document.querySelectorAll('input[name="Decision Maker"]');
+        const sqStartTimeline = document.getElementById('sq-start-timeline');
+        const sqBringDecisionMaker = document.getElementById('sq-bring-decision-maker');
+
+        function updateSubQuestions() {
+            const selectedValue = document.querySelector('input[name="Decision Maker"]:checked')?.value;
+
+            // Reset visibility and required attributes
+            sqStartTimeline.classList.add('hidden');
+            sqBringDecisionMaker.classList.add('hidden');
+
+            sqStartTimeline.querySelectorAll('input').forEach(input => input.required = false);
+            sqBringDecisionMaker.querySelectorAll('input').forEach(input => input.required = false);
+
+            if (selectedValue === "Me (I'm the decision maker)") {
+                sqStartTimeline.classList.remove('hidden');
+                sqStartTimeline.querySelectorAll('input').forEach(input => input.required = true);
+            } else if (selectedValue === "Partner/committee") {
+                sqBringDecisionMaker.classList.remove('hidden');
+                sqBringDecisionMaker.querySelectorAll('input').forEach(input => input.required = true);
+            }
+        }
+
+        decisionMakerRadios.forEach(radio => {
+            radio.addEventListener('change', updateSubQuestions);
+        });
+    </script>
+</body>
+
+</html>
